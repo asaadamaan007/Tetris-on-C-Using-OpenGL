@@ -1,8 +1,8 @@
+
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <math.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 int max = 15;
 
@@ -18,8 +18,7 @@ typedef struct node{
 } node;
 
 node *tet;
-int game1(int argc,char** argv)
-{
+
 void type(node *n){
 	if(n -> type == 0){
 		n -> x[0] = 4;
@@ -384,7 +383,6 @@ void win(){
 	for(i = 0; i < max; i++) 
 		if(m2[0][i] == 1){
 			printf("\n\nPoints : %d \n\n", points);	
-			printf("\nThank You for playing\n");
 			exit(0);			
 		}
 	
@@ -520,7 +518,6 @@ void keyboard(unsigned char key, int x, int y)
 {
 	if(key == 27) {	
 		printf("\n\nPoints : %d \n\n", points);	
-		printf("Thank you for playing");
 		exit(0);	
 	}else if((char)key == 'a'){
 		movey(tet, 0);
@@ -550,7 +547,7 @@ void init()
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, acolor);
 
 }
-void Reshape (int w, int h)
+void Reshape(int w, int h)
 {
     	glViewport(0, 0, w/2, h);
     	glMatrixMode(GL_PROJECTION); 
@@ -558,15 +555,13 @@ void Reshape (int w, int h)
 	gluPerspective(45.0, (double)w/(double)h, 0.1, 200.0);
 	
 }
-void Reshape (int (w/2), int (h/2))
+void disptext()
 {
-    	glViewport(w/2, 0, w/2, h);
-    	glMatrixMode(GL_PROJECTION); 
-	glLoadIdentity();
-	gluPerspective(45.0, (double)w/(double)h, 0.1, 200.0);
-	
+glRasterPos2f(100,400);
+glutBitmapString(GLUT_BITMAP_HELVETICA_18,(const unsigned char*) "Tetris by Asaad Aman and Arun Kumar");
 }
-int func1(int argc, char** argv){		
+int func1(int argc, char** argv){
+				
 		for(int i = 0; i < max; i++)
 		for(int j = 0; j < max; j++){
 			m [i][j] = 0;
@@ -589,10 +584,9 @@ int func1(int argc, char** argv){
 	glutTimerFunc(500, myIdleFunc, 0);
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc( keyboard );
+	disptext();
 	glutDisplayFunc(display);
-	disp1(argc,argv);
 	glutMainLoop();
-	}
 	}
 int main(int argc, char** argv)
 {
@@ -607,9 +601,8 @@ int main(int argc, char** argv)
 	printf("\nThank You!\n");
 	exit(0);
 	break;
-	case 1:
-	game(argc,argv);	
-	//func1(argc,argv);		
+	case 1:	
+	func1(argc,argv);		
 	break;
 	default:
 	printf("\nWrong choice. Retry\n");
